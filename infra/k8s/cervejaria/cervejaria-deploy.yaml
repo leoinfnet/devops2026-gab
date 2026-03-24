@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: cervejaria-deploy
-          image: localhost:5001/cervejaria:latest
+          image: localhost:5001/cervejaria-devops:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

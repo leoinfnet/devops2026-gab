@@ -62,3 +62,17 @@ jobs:
         with:
          commit_message: "github bot ci: Bump para a versao ${{steps.bump.outputs.version}}"
          file_pattern: 'pom.xml'
+      - name: Reiniciar deployment
+        run: |
+          set -e
+          kubectl rollout restart deployment/cervejaria-deploy -n cervejaria
+      - name: Verificar rollout
+        run: |
+         set -e
+         kubectl rollout status deployment/cervejaria-deploy  -n cervejaria --timeout=300s
+      - name: Mensagem de falha
+        if:  failure()
+        run: echo "O rollout falhou"
+      - name: Mensagem de sucesso
+        if: success()
+        run: echo "Rollout concluído com sucesso"
