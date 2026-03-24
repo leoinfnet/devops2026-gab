@@ -24,6 +24,20 @@ services:
     depends_on:
       - registry
     restart: always
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      - sonarqube-extensions:/opt/sonarqube/extensions
+      - sonarqube-logs:/opt/sonarqube/logs
+    restart: unless-stopped
+
 
 volumes:
   registry-data:
+  sonarqube-data:
+  sonarqube-extensions:
+  sonarqube-logs:
