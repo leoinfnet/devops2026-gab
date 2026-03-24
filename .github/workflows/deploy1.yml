@@ -56,5 +56,9 @@ jobs:
         run: |
           docker push localhost:5001/cervejaria-devops:latest
           docker push localhost:5001/cervejaria-devops:${{steps.bump.outputs.version}}
-      
 
+      - name: Commit POM
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+         commit_message: "github bot ci: Bump para a versao ${{steps.bump.outputs.version}}"
+         file_pattern: 'pom.xml'
