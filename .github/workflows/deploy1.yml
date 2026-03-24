@@ -50,3 +50,11 @@ jobs:
         run: |
             docker tag cervejaria-devops:${{steps.bump.outputs.version}} localhost:5001/cervejaria-devops:latest
             docker tag cervejaria-devops:${{steps.bump.outputs.version}} localhost:5001/cervejaria-devops:${{steps.bump.outputs.version}}
+          
+
+      - name: Docker PUSH
+        run: |
+          docker push localhost:5001/cervejaria-devops:latest
+          docker push localhost:5001/cervejaria-devops:${{steps.bump.outputs.version}}
+      
+
