@@ -39,3 +39,10 @@ jobs:
       - name: View Files
         run: |
           ls docker/
+          
+      - name: Build Docker
+        run: |
+          cd docker
+          VER=${{steps.bump.outputs.version}}
+          echo "Nova Versao: $VER"
+          docker build . -t leogloriainfnet/cervejaria-devops:${{steps.bump.outputs.version}}  
