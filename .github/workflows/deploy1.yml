@@ -1,0 +1,22 @@
+name: deploy1.yml
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-deploy:
+    runs-on: self-hosted
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Java
+        uses: actions/setup-java@v5
+        with:
+          java-version: 17
+          distribution: corretto
+      - name: Install Maven
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: '3.8.2'
