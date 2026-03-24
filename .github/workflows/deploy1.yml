@@ -45,4 +45,8 @@ jobs:
           cd docker
           VER=${{steps.bump.outputs.version}}
           echo "Nova Versao: $VER"
-          docker build . -t leogloriainfnet/cervejaria-devops:${{steps.bump.outputs.version}}  
+          docker build . -t cervejaria-devops:${{steps.bump.outputs.version}}
+      - name: Docker TAG
+        run: |
+            docker tag cervejaria-devops:${{steps.bump.outputs.version}} localhost:5001/cervejaria-devops:latest
+            docker tag cervejaria-devops:${{steps.bump.outputs.version}} localhost:5001/cervejaria-devops:${{steps.bump.outputs.version}}
